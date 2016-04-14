@@ -5,7 +5,7 @@ Source code of by blog. A set of demo project from my blog: http://kyleduo.com.
 ExchangeFragment
 ===
 
-ExchangeFragment in FragmentTabHost.
+Exchange fragment in FragmentTabHost.
 
 Blog ==> [http://kyleduo.com/?p=789](http://kyleduo.com/?p=789)
 

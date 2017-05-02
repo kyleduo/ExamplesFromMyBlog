@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     @BindView(R.id.main_appbar)
     AppBarLayout mAppBarLayout;
+
 //    @BindView(R.id.main_status_bar_stub)
 //    ViewStub mStatusBarStub;
 //    View mStatusBarOverlay;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+
+    <style name="TSB.ABL" parent="TSB">
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
+    <style name="TSB.CTL" parent="TSB">
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
+    <style name="TSB.IV" parent="TSB">
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
+    <style name="TSB.TB" parent="TSB">
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+</resources>

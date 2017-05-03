@@ -1,5 +1,7 @@
 package com.kyleduo.digging.translucentstatusbar;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -13,6 +15,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,6 +24,7 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_appbar)
     AppBarLayout mAppBarLayout;
 
-//    @BindView(R.id.main_status_bar_stub)
-//    ViewStub mStatusBarStub;
-//    View mStatusBarOverlay;
+    @BindView(R.id.main_status_bar_stub)
+    ViewStub mStatusBarStub;
+    View mStatusBarOverlay;
 
     @BindView(R.id.main_drawer)
     LinearLayout mDrawer;
@@ -68,7 +73,26 @@ public class MainActivity extends AppCompatActivity {
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mDrawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.KITKAT) {
+            mStatusBarStub.inflate();
+            mStatusBarOverlay = findViewById(R.id.main_status_bar_overlay);
+            mStatusBarOverlay.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    mStatusBarOverlay.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                    ViewGroup.LayoutParams layoutParams = mStatusBarOverlay.getLayoutParams();
+                    layoutParams.height = mToolbar.getPaddingTop();
+                }
+            });
+        }
     }
+
+    @OnClick(R.id.main_header)
+    public void clickHeader() {
+        startActivity(new Intent(this, SecondActivity.class));
+    }
+
 
     static class DummyItemViewHolder extends RecyclerView.ViewHolder {
 

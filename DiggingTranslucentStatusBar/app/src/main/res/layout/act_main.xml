@@ -48,15 +48,15 @@
                     style="@style/TSB.TB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minHeight="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-                <!--<ViewStub-->
-                <!--android:id="@+id/main_status_bar_stub"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="24dp"-->
-                <!--android:layout="@layout/stub_kitkat_statusbar"/>-->
+                <ViewStub
+                    android:id="@+id/main_status_bar_stub"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    app:layout_collapseMode="pin"
+                    android:layout="@layout/stub_kitkat_statusbar"/>
             </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>

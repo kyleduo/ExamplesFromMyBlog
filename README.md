@@ -1,13 +1,24 @@
-# BlogSourceCode
-Source code of by blog. A set of demo project from my blog: http://kyleduo.com.
+# ExamplesFromMyBlog
+
+This Repository contains source code of some demos in my blog. -->  [https://kyleduo.com](https://kyleduo.com)
 
 
-ExchangeFragment
-===
+
+### [Digging] Android Translucent Status Bar
+
+How to implement perfect translucent bar in >= 4.4 and why.
+
+![cover](https://static.kyleduo.com/blog/image/digging-translucentstatusbar/cover.png)
+
+
+
+
+
+### ExchangeFragment
 
 Exchange fragment in FragmentTabHost.
 
-Blog ==> [http://kyleduo.com/?p=789](http://kyleduo.com/?p=789)
+[Link](https://blog.kyleduo.com/2016/04/14/exchange-fragment-in-fragmenttabhost/)
 
 Preview:
 

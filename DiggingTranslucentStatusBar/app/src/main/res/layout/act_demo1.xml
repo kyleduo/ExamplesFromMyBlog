@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/main_appbar"
+        style="@style/TSB.ABL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/main_collapsing_toolbar"
+            style="@style/TSB.CTL"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="?attr/colorPrimary"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:scrimAnimationDuration="300"
+            app:scrimVisibleHeightTrigger="180dp"
+            app:statusBarScrim="@android:color/transparent"
+            app:titleEnabled="true">
+
+            <ImageView
+                android:id="@+id/main_header"
+                style="@style/TSB.IV"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/temp"
+                android:tint="#20000000"
+                app:layout_collapseMode="parallax"
+                tools:ignore="ContentDescription"/>
+
+            <com.kyleduo.digging.translucentstatusbar.widgets.DummySupportToolbar
+                android:id="@+id/tool_bar"
+                style="@style/TSB.TB"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+            <ViewStub
+                android:id="@+id/main_status_bar_stub"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:layout="@layout/stub_kitkat_statusbar"
+                app:layout_collapseMode="pin"/>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/sv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="900dp"
+            android:orientation="vertical">
+            
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -5,28 +5,29 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
-import android.view.View;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
  * for DiggingTranslucentStatusBar
- * Created by kyleduo on 2017/5/3.
+ * Created by kyleduo on 2017/5/5.
  */
 
-public class SecondActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity {
+    private static final int INVALID_RES_ID = 0;
 
-    @BindView(R.id.second_root)
-    View mRootView;
-    @BindView(R.id.second_toolbar)
+    @BindView(R.id.tool_bar)
     Toolbar mToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_second);
+        int resId = getLayoutResId();
+        if (resId == INVALID_RES_ID) {
+            return;
+        }
+        setContentView(resId);
         ButterKnife.bind(this);
 
         setSupportActionBar(mToolbar);
@@ -37,14 +38,10 @@ public class SecondActivity extends AppCompatActivity {
             //noinspection deprecation
             actionBar.setHomeAsUpIndicator(getResources().getDrawable(R.drawable.ic_back));
         }
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    protected int getLayoutResId() {
+        return INVALID_RES_ID;
     }
 }

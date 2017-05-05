@@ -1,5 +1,6 @@
 package com.kyleduo.digging.translucentstatusbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,10 +9,8 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,19 +19,19 @@ import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.kyleduo.digging.translucentstatusbar.widgets.OnItemClickListener;
+
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
 
     @BindView(R.id.main_rv)
     RecyclerView mRecyclerView;
-    @BindView(R.id.tool_bar)
-    Toolbar mToolbar;
     @BindView(R.id.main_collapsing_toolbar)
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     @BindView(R.id.main_appbar)
@@ -47,27 +46,33 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.main_drawer_layout)
     DrawerLayout mDrawerLayout;
 
+    @Override
+    protected int getLayoutResId() {
+        return R.layout.act_main;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_main);
-        ButterKnife.bind(this);
 
-
-        setSupportActionBar(mToolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            //noinspection deprecation
             actionBar.setHomeAsUpIndicator(getResources().getDrawable(R.drawable.ic_burger));
         }
 
         mCollapsingToolbarLayout.setExpandedTitleColor(0x00FFFFFF);
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mRecyclerView.setAdapter(new DummyAdapter());
+        mRecyclerView.setAdapter(new DummyAdapter(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
+                if (position == 0) {
+                    startActivity(new Intent(MainActivity.this, Demo1Activity.class));
+                } else if (position == 1) {
+                    startActivity(new Intent(MainActivity.this, Demo2Activity.class));
+                }
+            }
+        }));
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -107,14 +112,37 @@ public class MainActivity extends AppCompatActivity {
 
     private static class DummyAdapter extends RecyclerView.Adapter<DummyItemViewHolder> {
 
-        @Override
-        public DummyItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new DummyItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false));
+        private OnItemClickListener mOnItemClickListener;
+
+        private DummyAdapter(OnItemClickListener onItemClickListener) {
+            mOnItemClickListener = onItemClickListener;
         }
 
         @Override
+        public DummyItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            final DummyItemViewHolder holder = new DummyItemViewHolder(LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false));
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnItemClickListener != null) {
+                        mOnItemClickListener.onItemClick(v, holder, holder.getAdapterPosition());
+                    }
+                }
+            });
+            return holder;
+        }
+
+        @SuppressLint("SetTextI18n")
+        @Override
         public void onBindViewHolder(DummyItemViewHolder holder, int position) {
-            holder.tv.setText(String.format(Locale.getDefault(), "Item: %d", position));
+            if (position == 0) {
+                holder.tv.setText("CTL titleEnable == true");
+            } else if (position == 1) {
+                holder.tv.setText("No header. Has TabLayout");
+            } else {
+                holder.tv.setText(String.format(Locale.getDefault(), "Item: %d", position));
+            }
         }
 
         @Override

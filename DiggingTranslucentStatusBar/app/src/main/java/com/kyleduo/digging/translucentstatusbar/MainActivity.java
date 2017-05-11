@@ -70,6 +70,8 @@ public class MainActivity extends BaseActivity {
                     startActivity(new Intent(MainActivity.this, Demo1Activity.class));
                 } else if (position == 1) {
                     startActivity(new Intent(MainActivity.this, Demo2Activity.class));
+                } else if (position == 2) {
+                    startActivity(new Intent(MainActivity.this, Demo3Activity.class));
                 }
             }
         }));
@@ -140,6 +142,8 @@ public class MainActivity extends BaseActivity {
                 holder.tv.setText("CTL titleEnable == true");
             } else if (position == 1) {
                 holder.tv.setText("No header. Has TabLayout");
+            } else if (position == 2) {
+                holder.tv.setText("Use in Fragment");
             } else {
                 holder.tv.setText(String.format(Locale.getDefault(), "Item: %d", position));
             }

@@ -72,6 +72,8 @@ public class MainActivity extends BaseActivity {
                     startActivity(new Intent(MainActivity.this, Demo2Activity.class));
                 } else if (position == 2) {
                     startActivity(new Intent(MainActivity.this, Demo3Activity.class));
+                } else if (position == 3) {
+                    startActivity(new Intent(MainActivity.this, Demo3BActivity.class));
                 }
             }
         }));
@@ -144,6 +146,8 @@ public class MainActivity extends BaseActivity {
                 holder.tv.setText("No header. Has TabLayout");
             } else if (position == 2) {
                 holder.tv.setText("Use in Fragment");
+            } else if (position == 3) {
+                holder.tv.setText("Use in Fragment without toolbar");
             } else {
                 holder.tv.setText(String.format(Locale.getDefault(), "Item: %d", position));
             }

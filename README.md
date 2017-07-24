@@ -2,7 +2,9 @@
 
 This Repository contains source code of some demos in my blog. -->  [https://kyleduo.com](https://kyleduo.com)
 
+### [Digging] 支付宝首页交互
 
+![alipay](preview/alipay.png)
 
 ### [Digging] Android Translucent Status Bar
 
